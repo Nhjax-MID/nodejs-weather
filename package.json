@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/NHJAX/nodejs-weather/issues"
   },
-  "homepage": "https://github.com/NHJAX/nodejs-weather#readme"
+  "homepage": "https://github.com/NHJAX/nodejs-weather#readme",
+  "dependencies": {
+    "dht-sensor": "0.0.5"
+  }
 }
