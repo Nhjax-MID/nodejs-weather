@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/NHJAX/nodejs-weather#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "event-stream": "^4.0.1",
     "node-dht-sensor": "0.0.34",
     "weather-alerts-parser": "^0.1.6"
