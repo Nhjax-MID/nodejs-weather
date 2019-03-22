@@ -13,8 +13,8 @@ sensor.read(11, 4, function(err, temperature, humidity) {
     }
 });
 
-axios.get('http://alerts.weather.gov/cap/us.php?x=0')
-/*.then((response) => {
+/*axios.get('http://alerts.weather.gov/cap/us.php?x=0')
+.then((response) => {
   let parser= parser.stream(response.data);
   let es= es.stringify(parser);
   console.log(es);
@@ -23,6 +23,7 @@ axios.get('http://alerts.weather.gov/cap/us.php?x=0')
   console.log(err.response);
 });
 */
-.pipe(parser.stream())
-.pipe(es.stringify())
-.pipe(process.stdout);
+request.get('http://alerts.weather.gov/cap/us.php?x=1')
+  .pipe(parser.stream())
+  .pipe(es.stringify())
+  .pipe(process.stdout);
