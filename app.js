@@ -1,5 +1,9 @@
-var dht = require('dht-sensor');
-var current = dht.read(11, 07); // 11 : DHT11, 18 : BCM GPIO
+var sensor = require('node-dht-sensor');
 
-console.log(current.humidity);
-console.log(current.temperature);
+sensor.read(11, 4, function(err, temperature, humidity) {
+    if (!err) {
+        console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
+            'humidity: ' + humidity.toFixed(1) + '%'
+        );
+    }
+});
