@@ -12,7 +12,7 @@ sensor.read(11, 4, function(err, temperature, humidity) {
     }
 });
 
-request.get('http://alerts.weather.gov/cap/us.php?x=1')
+request.get('http://alerts.weather.gov/cap/us.php?x=0')
   .pipe(parser.stream())
   .pipe(es.stringify())
   .pipe(process.stdout);
