@@ -10,9 +10,9 @@ sensor.read(11, 4, function(err, temperature, humidity) {
             'humidity: ' + humidity.toFixed(1) + '%'
         );
     }
-});
+})
 
-request.get('http://alerts.weather.gov/cap/us.php?x=0')
+request.get('http://alerts.weather.gov/cap/us.php?x=1')
   .pipe(parser.stream())
   .pipe(es.stringify())
   .pipe(process.stdout);
