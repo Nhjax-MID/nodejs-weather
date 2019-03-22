@@ -17,7 +17,7 @@ axios.get('http://alerts.weather.gov/cap/us.php?x=0')
 .then((response) => {
   parser.stream();
   es.stringify();
-  process.stdout;
+  console.log(process.stdout);
 })
 .catch(err => {
   console.log(err.response);
