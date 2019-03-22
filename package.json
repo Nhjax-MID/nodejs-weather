@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/NHJAX/nodejs-weather#readme",
   "dependencies": {
-    
+    "node-dht-sensor": "0.0.34"
   }
 }
