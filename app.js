@@ -14,8 +14,8 @@ sensor.read(11, 4, function(err, temperature, humidity) {
 });
 
 axios.get('http://alerts.weather.gov/cap/us.php?x=0')
-.then(response => {
-  console.log(resonse.data);
+.then((response) => {
+  console.log(response.data);
 })
 .catch(err => {
   console.log(err.response);
