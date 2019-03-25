@@ -33,12 +33,12 @@ sensor.read(11, 4, function(err, temperature, humidity) {
     }
 });
 
-clientOnError = () => {
-  client.on('error', function(){
-      console.log("ERROR")
-      client.end()
-  });
-};
+// clientOnError = () => {
+//   client.on('error', function(){
+//       console.log("ERROR")
+//       client.end()
+//   });
+// };
 
 clientOnPublisher = () => {
   client.on('message', function (topic, message) {
@@ -50,7 +50,8 @@ clientOnPublisher = () => {
   });
 };
 
-clientOn = () => {
+function clientOn(){
+  console.log("Inside of clientOn");
   client.on('connect', function () {
     console.log("Inside of client on");
     console.log('connect', temp);
@@ -60,33 +61,9 @@ clientOn = () => {
     }
     else {
       console.log("Theres an error inside of subscribe");
-      client.end();
     }
-  });
-});
-
-// client.on('message', function (topic, message) {
-//   // message is Buffer
-//   console.log(message.toString());
-//   client.end();
-// });
-
-// console.log('foo');
-//   client.on('connect', function () {
-//     console.log("Inside of client on");
-//     console.log('connect', temp);
-//     client.subscribe('test', function (err) {
-//       if (!err) {
-//         console.log("Inside of subscribe");
-//         console.log('test', temp);
-//         client.publish('test', temp);
-//       }
-//       else{
-//       console.log(err);
-// }
-//     });
-//
-//   });
+  })
+  })
 };
 
 /* This is not working as expected */
