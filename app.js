@@ -18,14 +18,16 @@ sensor.read(11, 4, function(err, temperature, humidity) {
 var mqtt = require('mqtt')
 var client  = mqtt.connect('mqtt://test.mosquitto.org')
 var sensor = require('node-dht-sensor');
+var temp;
+var hum;
 
 sensor.read(11, 4, function(err, temperature, humidity) {
     if (!err) {
         console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
             'humidity: ' + humidity.toFixed(1) + '%'
         );
-        var global.temp = (temperature.toFixed(1));
-        var global.hum = (humidity.toFixed(1));
+        temp = (temperature.toFixed(1));
+        hum = (humidity.toFixed(1));
     }
 });
 
