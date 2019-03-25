@@ -15,14 +15,22 @@ sensor.read(11, 4, function(err, temperature, humidity) {
 })
 });*/
 
-var sensor = 26.0
 var mqtt = require('mqtt')
 var client  = mqtt.connect('mqtt://test.mosquitto.org')
+var sensor = require('node-dht-sensor');
+
+sensor.read(11, 4, function(err, temperature, humidity) {
+    if (!err) {
+        console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
+            'humidity: ' + humidity.toFixed(1) + '%'
+        );
+    }
+});
 
 client.on('connect', function () {
   client.subscribe('test', function (err) {
     if (!err) {
-      client.publish('test', sensor)
+      client.publish('test', temperature.toFixed(1))
     }
   })
 })
