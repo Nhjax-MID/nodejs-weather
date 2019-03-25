@@ -38,7 +38,7 @@ client.on('connect', function () {
   console.log("Entering Connect");
   run();
     client.subscribe(MQTT_TOPIC);
-    client.publish(MQTT_TOPIC, 'Hello mqtt');
+    client.publish(MQTT_TOPIC, temp);
     console.log("Exiting Connect");
 });
 
