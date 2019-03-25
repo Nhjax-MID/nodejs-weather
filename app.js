@@ -44,7 +44,7 @@ client.on('connect', function () {
 
 client.on('message', function (topic, message) {
   // message is Buffer
-  console.log(message.toString())
+  console.log(message)
   client.end()
 })
 // client.on('connect', function () {
