@@ -23,7 +23,6 @@ console.log('foo');
         console.log("Inside of subscribe");
         console.log('test', temp);
         client.publish('test', temp);
-        publisher();
       }
       else{
       console.log(err);
