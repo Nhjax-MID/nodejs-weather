@@ -21,6 +21,8 @@ var sensor = require('node-dht-sensor');
 
 sensor.read(11, 4, function(err, temperature, humidity) {
     if (!err) {
+      var temp = parseInt(temperature.toFixed(1));
+      var hum = parseInt(humidity.toFixed(1));
         console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
             'humidity: ' + humidity.toFixed(1) + '%'
         );
@@ -30,7 +32,7 @@ sensor.read(11, 4, function(err, temperature, humidity) {
 client.on('connect', function () {
   client.subscribe('test', function (err) {
     if (!err) {
-      client.publish('test', sensor.temperature)
+      client.publish('test', temp)
     }
   })
 })
