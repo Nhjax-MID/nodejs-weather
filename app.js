@@ -37,7 +37,7 @@ sensor.read(11, 4, function(err, temperature, humidity) {
 client.on('connect', function () {
   client.subscribe('presence', function (err) {
     if (!err) {
-      client.publish('presence', 'Hello mqtt')
+      client.publish('presence', {temp:temp, hum:hum});
     }
   })
 })
