@@ -5,6 +5,7 @@ var temp;
 var hum;
 
 function clientOn() {
+console.log('foo');
   client.on('connect', function () {
     console.log("Inside of client on");
     console.log('connect', temp);
