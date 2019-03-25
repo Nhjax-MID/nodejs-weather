@@ -13,7 +13,7 @@ function publisher(){
     client.end();
   });
 }
-function clientOn() {
+function clientOn(){
   client.on('connect', function () {
     console.log("Inside of client on");
     console.log('connect', temp);
@@ -21,14 +21,14 @@ function clientOn() {
     if (!err) {
       client.publish('test', temp)
     }
-  })
-})
+  });
+});
 
 client.on('message', function (topic, message) {
   // message is Buffer
-  console.log(message.toString())
-  client.end()
-})
+  console.log(message.toString());
+  client.end();
+});
 
 // console.log('foo');
 //   client.on('connect', function () {
