@@ -20,7 +20,9 @@ function callMQTT(temp, hum){
   client.on('connect', function () {
     client.subscribe('presence', function (err) {
       if (!err) {
-        client.publish('presence', {temp:temp,hum:hum});
+        let obj = {temp:temp,hum:hum};
+        buf = Buffer.from(JSON.stringify(obj));
+        client.publish('presence', buf);
       }
     })
   })
