@@ -13,17 +13,9 @@ function clientOn() {
         console.log("Inside of subscribe");
         console.log('test', temp);
         client.publish('test', temp);
-        client.on('message', function (topic, message) {
-          // message is Buffer
-          console.log("Inside of message");
-          console.log('connect', topic, message);
-          console.log(message.toString());
-          client.end();
-        });
       }
     });
   });
-
 };
 
 sensor.read(11, 4, function(err, temperature, humidity) {
