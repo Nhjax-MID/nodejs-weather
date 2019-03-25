@@ -3,18 +3,18 @@ var request = require('request');
 var headers = {
   'User-Agent': 'NMRTC WEATHER APP',
   'Content-Type' : 'application/ld+json',
-  'Accept' : 'application/vnd.noaa.dwml+json;version=1'
+  'Accept' : 'application/ld+json'
 }
 request({
-  headers: {
-     'User-Agent': 'NMRTC WEATHER APP',
-     'Content-Type' : 'application/json',
-     'Accept' : 'application/json'
-  },
-   url: 'https://alerts.weather.gov/cap/wwaatmget.php?x=FLC031&y=1',
-   method: 'POST'
+  headers: headers,
+  url: 'https://api.weather.gov/alerts?active=true&zone=FLZ025',
+  method: 'GET'
  }, function (err, res, body) {
-   console.log(body);
+ 	if (res.statusCode === 200) {
+ 		console.log(body);
+ 	} else if (err) {
+ 		console.log(err);
+ 	}
  });
 
 
