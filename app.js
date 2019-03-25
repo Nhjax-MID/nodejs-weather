@@ -14,8 +14,16 @@ console.log('foo');
         console.log("Inside of subscribe");
         console.log('test', temp);
         client.publish('test', temp);
+        return;
       }
       console.log(err);
+    });
+    client.on('message', function (topic, message) {
+      // message is Buffer
+      console.log("Inside of message");
+      console.log('connect', topic, message);
+      console.log(message.toString());
+      client.end();
     });
   });
 };
