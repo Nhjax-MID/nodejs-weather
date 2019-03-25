@@ -1,4 +1,4 @@
-var mqtt = require('mqtt')
+/*var mqtt = require('mqtt')
 var client  = mqtt.connect('mqtt://test.mosquitto.org')
 var sensor = require('node-dht-sensor');
 
@@ -13,4 +13,22 @@ sensor.read(11, 4, function(err, temperature, humidity) {
         );
     }
 })
-});
+});*/
+
+var sensor = 26.0
+var mqtt = require('mqtt')
+var client  = mqtt.connect('mqtt://test.mosquitto.org')
+
+client.on('connect', function () {
+  client.subscribe('test', function (err) {
+    if (!err) {
+      client.publish('test', sensor)
+    }
+  })
+})
+
+client.on('message', function (topic, message) {
+  // message is Buffer
+  console.log(message.toString())
+  client.end()
+})
