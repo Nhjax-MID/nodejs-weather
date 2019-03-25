@@ -29,7 +29,7 @@ function callMQTT(temp, hum){
 
   client.on('message', function (topic, message) {
     // message is Buffer
-    console.log(message.toString())
+    console.log(JSON.parse(message.toString()))
     client.end()
   })
 
