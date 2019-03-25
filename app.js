@@ -1,5 +1,5 @@
 var mqtt = require('mqtt')
-var client  = mqtt.connect('tcp://test.mosquitto.org')
+var client  = mqtt.connect('http://test.mosquitto.org')
 var sensor = require('node-dht-sensor');
 var temp;
 var hum;
