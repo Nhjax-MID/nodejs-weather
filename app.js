@@ -1,5 +1,5 @@
 var mqtt = require('mqtt')
-var client  = mqtt.connect('http://test.mosquitto.org')
+var client  = mqtt.connect('mqtt://test.mosquitto.org');
 var sensor = require('node-dht-sensor');
 var temp;
 var hum;
@@ -14,22 +14,32 @@ function publisher(){
   });
 }
 function clientOn() {
-console.log('foo');
   client.on('connect', function () {
     console.log("Inside of client on");
     console.log('connect', temp);
-    client.subscribe('test', function (err) {
-      if (!err) {
-        console.log("Inside of subscribe");
-        console.log('test', temp);
-        client.publish('test', temp);
-      }
-      else{
-      console.log(err);
-}
-    });
+  client.subscribe('presence', function (err) {
+    if (!err) {
+      client.publish('test', temp)
+    }
+  })
+})
 
-  });
+// console.log('foo');
+//   client.on('connect', function () {
+//     console.log("Inside of client on");
+//     console.log('connect', temp);
+//     client.subscribe('test', function (err) {
+//       if (!err) {
+//         console.log("Inside of subscribe");
+//         console.log('test', temp);
+//         client.publish('test', temp);
+//       }
+//       else{
+//       console.log(err);
+// }
+//     });
+//
+//   });
 };
 
 sensor.read(11, 4, function(err, temperature, humidity) {
