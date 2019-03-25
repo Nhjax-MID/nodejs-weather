@@ -31,7 +31,7 @@ function clientOn() {
         console.log('test', temp);
         client.publish('test', temp);
       }
-    })
+    });
   });
   client.on('message', function (topic, message) {
     // message is Buffer
