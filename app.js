@@ -24,8 +24,7 @@ sensor.read(11, 4, function(err, temperature, humidity) {
 
         console.log(temp);
         console.log(hum);
-        console.log("Entering client on");
-        clientOn();
+        console.log("Exiting Sensor.read");
 
     }
     else {
@@ -34,17 +33,23 @@ sensor.read(11, 4, function(err, temperature, humidity) {
 });
 
 client.on('connect', function () {
+  console.log("Entering Connect");
     client.subscribe(MQTT_TOPIC);
     client.publish(MQTT_TOPIC, 'Hello mqtt');
+    console.log("Exiting Connect");
 });
 
 client.on('message', function (topic, message) {
+  console.log("Entering message");
     // message is Buffer
     console.log(message.toString());
+    console.log("Exiting message");
     client.end();
 });
 
 client.on('error', function(){
+  console.log("Entering error");
     console.log("ERROR")
+    console.log("Exiting error");
     client.end()
 });
