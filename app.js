@@ -20,10 +20,11 @@ function clientOn() {
           console.log(message.toString());
           client.end();
         });
-      };
       }
     });
   });
+
+};
 
 sensor.read(11, 4, function(err, temperature, humidity) {
     if (!err) {
