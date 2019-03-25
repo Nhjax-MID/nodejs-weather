@@ -24,6 +24,12 @@ function clientOn() {
   })
 })
 
+client.on('message', function (topic, message) {
+  // message is Buffer
+  console.log(message.toString())
+  client.end()
+})
+
 // console.log('foo');
 //   client.on('connect', function () {
 //     console.log("Inside of client on");
