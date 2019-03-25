@@ -1,5 +1,5 @@
 var mqtt = require('mqtt')
-var client  = mqtt.connect("tcp://mqtt.flespi.io");
+var client  = mqtt.connect("mqtt://mqtt.swifitch.cz");
 var sensor = require('node-dht-sensor');
 var temp;
 var hum;
