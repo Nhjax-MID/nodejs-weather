@@ -20,15 +20,20 @@ clientOn = () => {
   client.subscribe('presence', function (err) {
     if (!err) {
       client.publish('test', temp)
+      client.end();
+    }
+    else {
+      console.log("Theres an error inside of subscribe");
+      client.end();
     }
   });
 });
 
-client.on('message', function (topic, message) {
-  // message is Buffer
-  console.log(message.toString());
-  client.end();
-});
+// client.on('message', function (topic, message) {
+//   // message is Buffer
+//   console.log(message.toString());
+//   client.end();
+// });
 
 // console.log('foo');
 //   client.on('connect', function () {
