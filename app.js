@@ -29,6 +29,16 @@ sensor.read(11, 4, function(err, temperature, humidity) {
         temp = (temperature.toFixed(1));
         hum = (humidity.toFixed(1));
 
+        client.on('connect', function () {
+          console.log('connect', temp);
+          client.subscribe('test', function (err) {
+            if (!err) {
+              console.log('test', temp);
+              client.publish('test', temp)
+            }
+          })
+        })
+
     }
     else {
       console.log(err);
@@ -36,19 +46,11 @@ sensor.read(11, 4, function(err, temperature, humidity) {
     }
 });
 
-client.on('connect', function () {
-  console.log('connect', temp);
-  client.subscribe('test', function (err) {
-    if (!err) {
-      console.log('test', temp);
-      client.publish('test', temp)
-    }
-  })
-})
+
 
 client.on('message', function (topic, message) {
   // message is Buffer
-  console.log('connect', temp);
+  console.log('connect', topic, message);
   console.log(message.toString())
   client.end()
-})
+});
