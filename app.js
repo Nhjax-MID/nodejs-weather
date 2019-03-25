@@ -1,5 +1,4 @@
-var mqtt = require('mqtt')
-var client = require('mqtt');
+var mqtt = require('mqtt');
 var sensor = require('node-dht-sensor');
 var temp;
 var hum;
@@ -14,24 +13,27 @@ var client  = mqtt.connect(MQTT_ADDR,{
   debug:true
 });
 
-sensor.read(11, 4, function(err, temperature, humidity) {
-    if (!err) {
-        console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
-            'humidity: ' + humidity.toFixed(1) + '%'
-        );
-        temp = (temperature.toFixed(1));
-        hum = (humidity.toFixed(1));
+function startProgram(){
+  sensor.read(11, 4, function(err, temperature, humidity) {
+      if (!err) {
+          console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
+              'humidity: ' + humidity.toFixed(1) + '%'
+          );
+          temp = (temperature.toFixed(1));
+          hum = (humidity.toFixed(1));
 
-        console.log(temp);
-        console.log(hum);
-        console.log("Entering client on");
-        clientOn();
+          console.log(temp);
+          console.log(hum);
+          console.log("Entering client on");
+          clientOn();
 
-    }
-    else {
-      console.log(err);
-    }
-});
+      }
+      else {
+        console.log(err);
+      }
+  })
+};
+
 
 // clientOnError = () => {
 //   client.on('error', function(){
@@ -40,7 +42,7 @@ sensor.read(11, 4, function(err, temperature, humidity) {
 //   });
 // };
 
-clientOnPublisher = () => {
+function clientOnPublisher(){
   client.on('message', function (topic, message) {
     // message is Buffer
     console.log("Inside of message");
@@ -65,6 +67,8 @@ function clientOn(){
   })
   })
 };
+
+startProgram();
 
 /* This is not working as expected */
 //var client = mqtt.connect({host: MQTT_ADDR, port:MQTT_PORT},{clientId: 'bgtestnodejs'});
