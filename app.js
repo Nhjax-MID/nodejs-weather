@@ -14,12 +14,33 @@ var client  = mqtt.connect(MQTT_ADDR,{
   debug:true
 });
 
-client.on('error', function(){
-    console.log("ERROR")
-    client.end()
+sensor.read(11, 4, function(err, temperature, humidity) {
+    if (!err) {
+        console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
+            'humidity: ' + humidity.toFixed(1) + '%'
+        );
+        temp = (temperature.toFixed(1));
+        hum = (humidity.toFixed(1));
+
+        console.log(temp);
+        console.log(hum);
+        console.log("Entering client on");
+        clientOn();
+
+    }
+    else {
+      console.log(err);
+    }
 });
 
-function publisher(){
+clientOnError = () => {
+  client.on('error', function(){
+      console.log("ERROR")
+      client.end()
+  });
+};
+
+clientOnPublisher = () => {
   client.on('message', function (topic, message) {
     // message is Buffer
     console.log("Inside of message");
@@ -44,24 +65,6 @@ clientOn = () => {
   });
 });
 
-sensor.read(11, 4, function(err, temperature, humidity) {
-    if (!err) {
-        console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
-            'humidity: ' + humidity.toFixed(1) + '%'
-        );
-        temp = (temperature.toFixed(1));
-        hum = (humidity.toFixed(1));
-
-        console.log(temp);
-        console.log(hum);
-        console.log("Entering client on");
-        clientOn();
-
-    }
-    else {
-      console.log(err);
-    }
-});
 // client.on('message', function (topic, message) {
 //   // message is Buffer
 //   console.log(message.toString());
