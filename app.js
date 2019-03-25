@@ -17,11 +17,10 @@ function callMQTT(temp, hum){
 
   var client  = mqtt.connect(MQTT_ADDR,{clientId: 'bgtestnodejs', protocolId: 'MQIsdp', protocolVersion: 3, connectTimeout:1000, debug:true});
 
-
   client.on('connect', function () {
     client.subscribe('presence', function (err) {
       if (!err) {
-        client.publish('presence', temp);
+        client.publish('presence', {temp:temp,hum:hum});
       }
     })
   })
@@ -31,6 +30,14 @@ function callMQTT(temp, hum){
     console.log(message.toString())
     client.end()
   })
+
+  client.on('error', function(){
+    console.log("Entering error");
+      console.log("ERROR")
+      console.log("Exiting error");
+      client.end()
+  })
+
 };
 
 //function run(){
@@ -73,9 +80,3 @@ function callMQTT(temp, hum){
 //     client.end();
 // });
 //
-// client.on('error', function(){
-//   console.log("Entering error");
-//     console.log("ERROR")
-//     console.log("Exiting error");
-//     client.end()
-// });
