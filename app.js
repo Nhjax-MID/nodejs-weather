@@ -13,7 +13,7 @@ function publisher(){
     client.end();
   });
 }
-function clientOn(){
+clientOn = () => {
   client.on('connect', function () {
     console.log("Inside of client on");
     console.log('connect', temp);
