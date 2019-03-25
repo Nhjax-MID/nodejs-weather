@@ -27,6 +27,20 @@ sensor.read(11, 4, function(err, temperature, humidity) {
         console.log(hum);
         console.log("Exiting Sensor.read");
 
+        client.on('connect', function () {
+          client.subscribe('presence', function (err) {
+            if (!err) {
+              client.publish('presence', temp);
+            }
+          })
+        })
+
+        client.on('message', function (topic, message) {
+          // message is Buffer
+          console.log(message.toString())
+          client.end()
+        })
+
     }
     else {
       console.log(err);
@@ -34,19 +48,7 @@ sensor.read(11, 4, function(err, temperature, humidity) {
 });
 };
 
-client.on('connect', function () {
-  client.subscribe('presence', function (err) {
-    if (!err) {
-      client.publish('presence', {temp:temp, hum:hum});
-    }
-  })
-})
 
-client.on('message', function (topic, message) {
-  // message is Buffer
-  console.log(message)
-  client.end()
-})
 // client.on('connect', function () {
 //   console.log("Entering Connect");
 //   run();
