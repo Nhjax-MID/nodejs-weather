@@ -26,25 +26,29 @@ sensor.read(11, 4, function(err, temperature, humidity) {
         console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
             'humidity: ' + humidity.toFixed(1) + '%'
         );
-        this.temp = (temperature.toFixed(1));
-        this.hum = (humidity.toFixed(1));
+        temp = (temperature.toFixed(1));
+        hum = (humidity.toFixed(1));
 
+    }
+    else {
+      console.log(err);
+      return;
     }
 });
 
 client.on('connect', function () {
-  console.log('connect', this.temp);
+  console.log('connect', temp);
   client.subscribe('test', function (err) {
     if (!err) {
-      console.log('test', this.temp);
-      client.publish('test', this.temp)
+      console.log('test', temp);
+      client.publish('test', temp)
     }
   })
 })
 
 client.on('message', function (topic, message) {
   // message is Buffer
-  console.log('connect', this.temp);
+  console.log('connect', temp);
   console.log(message.toString())
   client.end()
 })
