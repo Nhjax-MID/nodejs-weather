@@ -12,7 +12,7 @@ function publisher(){
     console.log(message.toString());
     client.end();
   });
-}
+};
 clientOn = () => {
   client.on('connect', function () {
     console.log("Inside of client on");
