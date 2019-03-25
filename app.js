@@ -30,7 +30,7 @@ sensor.read(11, 4, function(err, temperature, humidity) {
 client.on('connect', function () {
   client.subscribe('test', function (err) {
     if (!err) {
-      client.publish('test', temperature.toFixed(1))
+      client.publish('test', sensor.temperature)
     }
   })
 })
