@@ -21,7 +21,7 @@ sensor.read(11, 4, function(err, temperature, humidity) {
         );
         temp = (temperature.toFixed(1));
         hum = (humidity.toFixed(1));
-
+run();
         console.log(temp);
         console.log(hum);
         console.log("Exiting Sensor.read");
@@ -32,6 +32,7 @@ sensor.read(11, 4, function(err, temperature, humidity) {
     }
 });
 
+function run(){
 client.on('connect', function () {
   console.log("Entering Connect");
     client.subscribe(MQTT_TOPIC);
@@ -53,3 +54,4 @@ client.on('error', function(){
     console.log("Exiting error");
     client.end()
 });
+};
