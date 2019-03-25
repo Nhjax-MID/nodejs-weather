@@ -14,6 +14,7 @@ function clientOn() {
         console.log('test', temp);
         client.publish('test', temp);
       }
+      console.log(err);
     });
   });
 };
