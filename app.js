@@ -14,7 +14,7 @@ var MQTT_PORT           = 1883;
 /* This works... */
 var client  = mqtt.connect(MQTT_ADDR,{clientId: 'bgtestnodejs', protocolId: 'MQIsdp', protocolVersion: 3, connectTimeout:1000, debug:true});
 
-function run(){
+//function run(){
   sensor.read(11, 4, function(err, temperature, humidity) {
       if (!err) {
           console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
@@ -34,7 +34,7 @@ function run(){
         console.log(err);
       }
   });
-};
+//};
 
 function callMQTT(temp, hum){
   client.on('connect', function () {
