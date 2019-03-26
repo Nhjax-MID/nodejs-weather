@@ -64,7 +64,7 @@ function WX(){
       }
       else {
             console.log("");
-        console.log("DANGER WILL ROBINSON SENSOR IS ON VACATION DESTROY ROBINSON FAMILY DESTROY JUPITER ONE");
+        console.log("DANGER WILL ROBINSON SENSOR IS ON VACATION DESTROY ROBINSON FAMILY DESTROY JUPITER ONE"); //sensor not working
       }
   })
 };
