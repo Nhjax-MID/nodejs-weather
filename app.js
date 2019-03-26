@@ -18,7 +18,7 @@ function WX(){
 
   PythonShell.run('script.py', options, function (err, results) {
     console.log('Message from Python' + results);
-    res = (results);
+    res = results;
     console.log(res);
 });
 
