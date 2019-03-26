@@ -32,7 +32,8 @@ function callMQTT(temp, hum){ //wrapped MQTT message handler in function callMQT
   client.on('message', function (topic, message) { //message is echoed on publisher terminal
     // message is Buffer
     console.log("Entering Echo");
-    console.log("Here is what was sent to the server" + JSON.parse(message.toString()))
+    console.log(JSON.parse(message.toString()))
+        console.log("Exiting Echo");
     client.end() //Client is terminated
   })
 
@@ -47,20 +48,22 @@ function callMQTT(temp, hum){ //wrapped MQTT message handler in function callMQT
 function WX(){
   sensor.read(11, 4, function(err, temperature, humidity) {
       if (!err) {
+            console.log("");
           console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
               'humidity: ' + humidity.toFixed(1) + '%'
           );
           temp = (temperature.toFixed(1));
           hum = (humidity.toFixed(1));
 
-          console.log("SENSOR READ SUCCESSFUL" + temp);
-          console.log("SENSOR READ SUCCESSFUL" + hum);
+          console.log("SENSOR READ SUCCESSFUL " + temp);
+          console.log("SENSOR READ SUCCESSFUL " + hum);
           console.log("Exiting Sensor.read");
           console.log("Calling callMQTT");
           callMQTT(temp, hum);
 
       }
       else {
+            console.log("");
         console.log("DANGER WILL ROBINSON SENSOR IS ON VACATION DESTROY ROBINSON FAMILY DESTROY JUPITER ONE");
       }
   })
