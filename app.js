@@ -17,13 +17,12 @@ function WX(){
 };
 
   PythonShell.run('script.py', options, function (results) {
+    console.log('Message from Python' + results);
     results = (results);
 });
 
   sensor.read(11, 4, function(err, temperature, humidity) {
       if (!err) {
-            console.log("");
-
         /*  console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
               'humidity: ' + humidity.toFixed(1) + '%'
           ); */
