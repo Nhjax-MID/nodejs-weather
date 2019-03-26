@@ -14,8 +14,7 @@ function WX(){
   let options = {
     mode: 'text',};
 
-  PythonShell.run('script.py', options, function (results, err) {
-    if (err) throw err;
+  PythonShell.run('script.py', options, function (results) {
     console.log('Results from Python ' + results);
     results = (results);
   });
