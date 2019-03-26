@@ -1,9 +1,9 @@
 var sensor = require('node-dht-sensor'); //little blue sensor modual
-var temp; //global variable
-var hum; //global variable
-var res;
+var temp; //global variable for DHT Sensors
+var hum; //global variable for DHT Sensors
+var res; //global variable for future lightning board
 var mqtt = require('mqtt'); //import modual
-const {PythonShell} = require("python-shell");
+const {PythonShell} = require("python-shell"); //Modual for Python Script for Future Lighting Board
 
 var MQTT_TOPIC          = "test";//sets topic
 var MQTT_ADDR           = "mqtt://76.106.248.100"; //address of subscriber
@@ -11,18 +11,18 @@ var MQTT_PORT           = 1883; //common MQTT port
 
 function WX(){
 
-  let options = {
-    mode: 'test',
-    pythonOptions: ['-u']
-};
+  let options = { //Python Script
+    mode: 'test', //Python Script
+    pythonOptions: ['-u'] //Python Script
+}; //Python Script
 
-  PythonShell.run('script.py', options, function (err, results) {
-    if (results = "yes"){
-      res = "yes";
-    } else {
-      res = "no";
-    }
-});
+  PythonShell.run('script.py', options, function (err, results) { //Python Script
+    if (results = "yes"){ //Python Script for Future Lighting Board
+      res = "yes"; //Python Script for Future Lighting Board
+    } else { //Python Script for Future Lighting Board
+      res = "no"; //Python Script for Future Lighting Board
+    } //Python Script for Future Lighting Board
+}); //Python Script for Future Lighting Board
 
 
   sensor.read(11, 4, function(err, temperature, humidity) {
@@ -39,7 +39,7 @@ function WX(){
       }
       else {
             console.log("");
-        console.log("DANGER WILL ROBINSON SENSOR IS ON VACATION DESTROY ROBINSON FAMILY DESTROY JUPITER ONE"); //sensor not working
+        console.log("DANGER WILL ROBINSON SENSOR IS ON VACATION DESTROY ROBINSON FAMILY DESTROY JUPITER ONE"); //DHT sensor not working
       }
   })
 };
