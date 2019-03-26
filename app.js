@@ -17,7 +17,6 @@ function WX(){
 };
 
   PythonShell.run('script.py', options, function (err, results) {
-    console.log('Message from Python ' + results);
     if (results = "yes"){
       res = "yes";
     } else {
