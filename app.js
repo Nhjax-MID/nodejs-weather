@@ -19,16 +19,20 @@ function callMQTT(temp, hum){ //wrapped MQTT message handler in function callMQT
   client.on('connect', function () { //MQTT message handler "Publisher"
     client.subscribe(MQTT_TOPIC, function (err) {
       if (!err) {
+          console.log("Entering Message Publisher");
         let obj = {temp:temp,hum:hum}; //oject is assigned value
         buf = Buffer.from(JSON.stringify(obj)); //buffer is dumped into a JSON object using obj
+        console.log("Memory dumped");
         client.publish(MQTT_TOPIC, buf); //message is pulished to subscriber
+          console.log("Message Sent to server");
       }
     })
   })
 
   client.on('message', function (topic, message) { //message is echoed on publisher terminal
     // message is Buffer
-    console.log(JSON.parse(message.toString()))
+    console.log("Entering Echo");
+    console.log("Here is what was sent to the server" + JSON.parse(message.toString()))
     client.end() //Client is terminated
   })
 
@@ -49,10 +53,10 @@ function WX(){
           temp = (temperature.toFixed(1));
           hum = (humidity.toFixed(1));
 
-          console.log(temp);
-          console.log(hum);
+          console.log("SENSOR READ SUCCESSFUL" + temp);
+          console.log("SENSOR READ SUCCESSFUL" + hum);
           console.log("Exiting Sensor.read");
-
+          console.log("Calling callMQTT");
           callMQTT(temp, hum);
 
       }
