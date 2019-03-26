@@ -12,7 +12,7 @@ var MQTT_PORT           = 1883; //common MQTT port
 function WX(){
 
   let options = {
-    mode: 'text',
+    mode: 'json',
     pythonOptions: ['-u']
 };
 
