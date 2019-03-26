@@ -12,12 +12,20 @@ var MQTT_PORT           = 1883; //common MQTT port
 function WX(){
 
   let options = {
-    mode: 'text',};
+    mode: 'text',
+    pythonOptions: ['-u']
+};
 
   PythonShell.run('script.py', options, function (results) {
-    console.log('Results from Python ' + results);
     results = (results);
-  });
+});
+
+  pyshell.end(function (err) {
+    if (err){
+        throw err;
+    };
+
+});
 
   sensor.read(11, 4, function(err, temperature, humidity) {
       if (!err) {
