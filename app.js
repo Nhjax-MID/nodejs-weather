@@ -47,6 +47,18 @@ function callMQTT(temp, hum){ //wrapped MQTT message handler in function callMQT
   })
 
 };
+
+function script(){
+  let options = {
+  mode: 'json',};
+  PythonShell.run('script.py', options, function (err, results) {
+  if (err) throw err;
+  console.log('finished Python Script');
+  WX();
+
+})
+};
+
 function WX(){
   sensor.read(11, 4, function(err, temperature, humidity) {
       if (!err) {
@@ -63,16 +75,7 @@ function WX(){
           console.log("Calling callMQTT");
           console.log("Starting Python Script");
 
-            function script(results){
-              let options = {
-              mode: 'json',};
-              PythonShell.run('script.py', options, function (err, results) {
-              if (err) throw err;
-              console.log('finished Python Script');
-          });
-};
-          script(results);
-          callMQTT(temp, hum);
+          callMQTT(temp, hum, results);
 
 
     }
@@ -83,4 +86,4 @@ function WX(){
   })
 };
 
-setInterval(WX, 10000); //loops WX function every 60 seconds (10000 milliseconds) TO INFINITY AND BEYOND OR ATLEAST UNTIL A REBOOT
+setInterval(script, 10000); //loops WX function every 60 seconds (10000 milliseconds) TO INFINITY AND BEYOND OR ATLEAST UNTIL A REBOOT
