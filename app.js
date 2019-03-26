@@ -2,6 +2,7 @@ var sensor = require('node-dht-sensor'); //little blue sensor modual
 var temp; //global variable
 var hum; //global variable
 var mqtt = require('mqtt'); //import modual
+const {PythonShell} = require("python-shell");
 
 var MQTT_TOPIC          = "test";//sets topic
 var MQTT_ADDR           = "mqtt://76.106.248.100"; //address of subscriber
@@ -59,6 +60,16 @@ function WX(){
           console.log("SENSOR READ SUCCESSFUL " + hum);
           console.log("Exiting Sensor.read");
           console.log("Calling callMQTT");
+          console.log("Starting Python Script");
+          let options = {
+            mode: 'json',};
+
+          PythonShell.run('script.py', options, function (err, results) {
+            if (err) throw err;
+            console.log(results);
+            console.log('finished Python Script');
+          });
+
           callMQTT(temp, hum);
 
       }
