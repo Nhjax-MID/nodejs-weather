@@ -61,6 +61,15 @@ function WX(){
           console.log("Exiting Sensor.read");
           console.log("Calling callMQTT");
 
+          let options = {
+            mode: 'json',};
+
+          PythonShell.run('script.py', options, function (err, results) {
+            if (err) throw err;
+            console.log('finished script');
+            console.log(results);
+          });
+
           callMQTT(temp, hum);
 
       }
@@ -71,4 +80,4 @@ function WX(){
   })
 };
 
-setInterval(WX, 60000); //loops WX function every 60 seconds (10000 milliseconds) TO INFINITY AND BEYOND OR ATLEAST UNTIL A REBOOT
+setInterval(WX, 10000); //loops WX function every 10 seconds (10000 milliseconds) TO INFINITY AND BEYOND OR ATLEAST UNTIL A REBOOT
