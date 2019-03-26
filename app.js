@@ -9,6 +9,37 @@ var MQTT_TOPIC          = "test";//sets topic
 var MQTT_ADDR           = "mqtt://76.106.248.100"; //address of subscriber
 var MQTT_PORT           = 1883; //common MQTT port
 
+function WX(){
+
+  let options = {
+    mode: 'json',};
+  PythonShell.run('script.py', options, function (err, results) {
+    if (err) throw err;
+    console.log('Results from Python ' + results);
+    results = (results);
+  });
+
+  sensor.read(11, 4, function(err, temperature, humidity) {
+      if (!err) {
+            console.log("");
+
+        /*  console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
+              'humidity: ' + humidity.toFixed(1) + '%'
+          ); */
+
+          temp = (temperature.toFixed(1));
+          hum = (humidity.toFixed(1));
+
+          callMQTT(temp, hum, results);
+
+      }
+      else {
+            console.log("");
+        console.log("DANGER WILL ROBINSON SENSOR IS ON VACATION DESTROY ROBINSON FAMILY DESTROY JUPITER ONE"); //sensor not working
+      }
+  })
+};
+
 function callMQTT(temp, hum, results){ //wrapped MQTT message handler in function callMQTT
 
   var client  = mqtt.connect(MQTT_ADDR,{
@@ -42,33 +73,6 @@ function callMQTT(temp, hum, results){ //wrapped MQTT message handler in functio
   })
 
 };
-function WX(){
-  sensor.read(11, 4, function(err, temperature, humidity) {
-      if (!err) {
-            console.log("");
-          console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
-              'humidity: ' + humidity.toFixed(1) + '%'
-          );
-          temp = (temperature.toFixed(1));
-          hum = (humidity.toFixed(1));
 
-          let options = {
-            mode: 'json',};
-
-          PythonShell.run('script.py', options, function (err, results) {
-            if (err) throw err;
-            console.log('Results from Python ' + results);
-            results = (results);
-          });
-
-          callMQTT(temp, hum, results);
-
-      }
-      else {
-            console.log("");
-        console.log("DANGER WILL ROBINSON SENSOR IS ON VACATION DESTROY ROBINSON FAMILY DESTROY JUPITER ONE"); //sensor not working
-      }
-  })
-};
 
 setInterval(WX, 10000); //loops WX function every 10 seconds (10000 milliseconds) TO INFINITY AND BEYOND OR ATLEAST UNTIL A REBOOT
