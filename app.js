@@ -1,6 +1,7 @@
 var sensor = require('node-dht-sensor'); //little blue sensor modual
 var temp; //global variable
 var hum; //global variable
+var results;
 var mqtt = require('mqtt'); //import modual
 const {PythonShell} = require("python-shell");
 
@@ -21,7 +22,7 @@ function callMQTT(temp, hum){ //wrapped MQTT message handler in function callMQT
     client.subscribe(MQTT_TOPIC, function (err) {
       if (!err) {
           console.log("Entering Message Publisher");
-        let obj = {temp:temp,hum:hum}; //oject is assigned value
+        let obj = {temp:temp,hum:hum,results}; //oject is assigned value
         buf = Buffer.from(JSON.stringify(obj)); //buffer is dumped into a JSON object using obj
         console.log("Memory dumped");
         client.publish(MQTT_TOPIC, buf); //message is pulished to subscriber
@@ -68,6 +69,7 @@ function WX(){
             if (err) throw err;
             console.log('finished script');
             console.log(results);
+            results = (results);
           });
 
           callMQTT(temp, hum);
