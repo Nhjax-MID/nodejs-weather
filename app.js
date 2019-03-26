@@ -20,7 +20,7 @@ function WX(){
     results = (results);
 });
 
-  pyshell.end(function (err) {
+  PythonShell.end(function (err) {
     if (err){
         throw err;
     };
