@@ -1,7 +1,6 @@
 var sensor = require('node-dht-sensor'); //little blue sensor modual
 var temp; //global variable
 var hum; //global variable
-var results; //global variable
 var mqtt = require('mqtt'); //import modual
 const {PythonShell} = require("python-shell");
 
@@ -22,7 +21,7 @@ function callMQTT(temp, hum){ //wrapped MQTT message handler in function callMQT
     client.subscribe(MQTT_TOPIC, function (err) {
       if (!err) {
           console.log("Entering Message Publisher");
-        let obj = {temp:temp,hum:hum,results:results}; //oject is assigned value
+        let obj = {temp:temp,hum:hum}; //oject is assigned value
         buf = Buffer.from(JSON.stringify(obj)); //buffer is dumped into a JSON object using obj
         console.log("Memory dumped");
         client.publish(MQTT_TOPIC, buf); //message is pulished to subscriber
@@ -47,18 +46,6 @@ function callMQTT(temp, hum){ //wrapped MQTT message handler in function callMQT
   })
 
 };
-
-function script(){
-  let options = {
-  mode: 'json',};
-  PythonShell.run('script.py', options, function (err, results) {
-  if (err) throw err;
-  console.log('finished Python Script');
-  WX();
-
-})
-};
-
 function WX(){
   sensor.read(11, 4, function(err, temperature, humidity) {
       if (!err) {
@@ -73,12 +60,10 @@ function WX(){
           console.log("SENSOR READ SUCCESSFUL " + hum);
           console.log("Exiting Sensor.read");
           console.log("Calling callMQTT");
-          console.log("Starting Python Script");
 
-          callMQTT(temp, hum, results);
+          callMQTT(temp, hum);
 
-
-    }
+      }
       else {
             console.log("");
         console.log("DANGER WILL ROBINSON SENSOR IS ON VACATION DESTROY ROBINSON FAMILY DESTROY JUPITER ONE"); //sensor not working
@@ -86,4 +71,4 @@ function WX(){
   })
 };
 
-setInterval(script, 10000); //loops WX function every 60 seconds (10000 milliseconds) TO INFINITY AND BEYOND OR ATLEAST UNTIL A REBOOT
+setInterval(WX, 60000); //loops WX function every 60 seconds (10000 milliseconds) TO INFINITY AND BEYOND OR ATLEAST UNTIL A REBOOT
