@@ -20,13 +20,6 @@ function WX(){
     results = (results);
 });
 
-  PythonShell.end(function (err) {
-    if (err){
-        throw err;
-    };
-
-});
-
   sensor.read(11, 4, function(err, temperature, humidity) {
       if (!err) {
             console.log("");
