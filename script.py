@@ -1,4 +1,9 @@
 import sys
 import json
 
-print("Lighting Detected")
+L = "yes"
+
+json_map = {"LightingSeen": L}
+msg = json.dumps(json_map)
+
+print(msg)
