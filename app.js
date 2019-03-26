@@ -19,6 +19,7 @@ function WX(){
   PythonShell.run('script.py', options, function (err, results) {
     console.log('Message from Python' + results);
     res = (results);
+    console.log(res);
 });
 
 
@@ -74,6 +75,5 @@ function callMQTT(temp, hum, res){ //wrapped MQTT message handler in function ca
   })
 
 };
-
 
 setInterval(WX, 10000); //loops WX function every 10 seconds (10000 milliseconds) TO INFINITY AND BEYOND OR ATLEAST UNTIL A REBOOT
