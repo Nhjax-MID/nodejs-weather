@@ -1,7 +1,7 @@
 var sensor = require('node-dht-sensor'); //little blue sensor modual
 var temp; //global variable
 var hum; //global variable
-var results;
+var res;
 var mqtt = require('mqtt'); //import modual
 const {PythonShell} = require("python-shell");
 
@@ -17,7 +17,12 @@ function WX(){
 };
 
   PythonShell.run('script.py', options, function (err, results) {
-    console.log('Message from Python' + results);
+    console.log('Message from Python ' + results);
+    if (results = "yes"){
+      res = "yes";
+    } else {
+      res = "no";
+    }
 });
 
 
@@ -30,7 +35,7 @@ function WX(){
           temp = (temperature.toFixed(1));
           hum = (humidity.toFixed(1));
 
-          callMQTT(temp, hum, results);
+          callMQTT(temp, hum, res);
 
       }
       else {
@@ -40,7 +45,7 @@ function WX(){
   })
 };
 
-function callMQTT(temp, hum, results){ //wrapped MQTT message handler in function callMQTT
+function callMQTT(temp, hum, res){ //wrapped MQTT message handler in function callMQTT
 
   var client  = mqtt.connect(MQTT_ADDR,{
     clientId: 'bgtestnodejs',
@@ -52,7 +57,7 @@ function callMQTT(temp, hum, results){ //wrapped MQTT message handler in functio
   client.on('connect', function () { //MQTT message handler "Publisher"
     client.subscribe(MQTT_TOPIC, function (err) {
       if (!err) {
-        let obj = {temp:temp,hum:hum,results:results}; //oject is assigned value
+        let obj = {temp:temp,hum:hum,res:res}; //oject is assigned value
         buf = Buffer.from(JSON.stringify(obj)); //buffer is dumped into a JSON object using obj
         client.publish(MQTT_TOPIC, buf); //message is pulished to subscriber
       }

@@ -3,6 +3,4 @@ import json
 
 L = "yes"
 
-msg = json.dumps(L)
-
-print(msg)
+print(L)
