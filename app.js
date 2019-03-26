@@ -1,48 +1,46 @@
-var mqtt = require('mqtt');
-var sensor = require('node-dht-sensor');
-var temp;
-var hum;
-var mqtt = require('mqtt');
+var sensor = require('node-dht-sensor'); //little blue sensor modual
+var temp; //global variable
+var hum; //global variable
+var mqtt = require('mqtt'); //import modual
 
-var MQTT_TOPIC          = "hello";
-var MQTT_ADDR           = "mqtt://test.mosquitto.org";
-var MQTT_PORT           = 1883;
+var MQTT_TOPIC          = "test";//sets topic
+var MQTT_ADDR           = "mqtt://76.106.248.100"; //address of subscriber
+var MQTT_PORT           = 1883; //common MQTT port
 
-/* This is not working as expected */
-//var client = mqtt.connect({host: MQTT_ADDR, port:MQTT_PORT},{clientId: 'bgtestnodejs'});
+function callMQTT(temp, hum){ //wrapped MQTT message handler in function callMQTT
 
-/* This works... */
+  var client  = mqtt.connect(MQTT_ADDR,{
+    clientId: 'bgtestnodejs',
+    protocolId: 'MQIsdp',
+    protocolVersion: 3,
+    connectTimeout:1000,
+    debug:true});
 
-function callMQTT(temp, hum){
-
-  var client  = mqtt.connect(MQTT_ADDR,{clientId: 'bgtestnodejs', protocolId: 'MQIsdp', protocolVersion: 3, connectTimeout:1000, debug:true});
-
-  client.on('connect', function () {
-    client.subscribe('presence', function (err) {
+  client.on('connect', function () { //MQTT message handler "Publisher"
+    client.subscribe(MQTT_TOPIC, function (err) {
       if (!err) {
-        let obj = {temp:temp,hum:hum};
-        buf = Buffer.from(JSON.stringify(obj));
-        client.publish('presence', buf);
+        let obj = {temp:temp,hum:hum}; //oject is assigned value
+        buf = Buffer.from(JSON.stringify(obj)); //buffer is dumped into a JSON object using obj
+        client.publish(MQTT_TOPIC, buf); //message is pulished to subscriber
       }
     })
   })
 
-  client.on('message', function (topic, message) {
+  client.on('message', function (topic, message) { //message is echoed on publisher terminal
     // message is Buffer
     console.log(JSON.parse(message.toString()))
-    client.end()
+    client.end() //Client is terminated
   })
 
-  client.on('error', function(){
+  client.on('error', function(){ //Error handler
     console.log("Entering error");
-      console.log("ERROR")
+      console.log("DANGER WILL ROBINSON ERROR ERROR MESSAGE HANDLER FAILED DESTROY ROBINSON FAMILY DESTROY JUPITER ONE")
       console.log("Exiting error");
       client.end()
   })
 
 };
-
-//function run(){
+function WX(){
   sensor.read(11, 4, function(err, temperature, humidity) {
       if (!err) {
           console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
@@ -59,26 +57,9 @@ function callMQTT(temp, hum){
 
       }
       else {
-        console.log(err);
+        console.log("DANGER WILL ROBINSON SENSOR IS ON VACATION DESTROY ROBINSON FAMILY DESTROY JUPITER ONE");
       }
-  });
-//};
+  })
+};
 
-
-
-// client.on('connect', function () {
-//   console.log("Entering Connect");
-//   run();
-//     client.subscribe(MQTT_TOPIC);
-//     client.publish(MQTT_TOPIC, temp);
-//     console.log("Exiting Connect");
-// });
-//
-// client.on('message', function (topic, message) {
-//   console.log("Entering message");
-//     // message is Buffer
-//     console.log(message.toString());
-//     console.log("Exiting message");
-//     client.end();
-// });
-//
+setInterval(WX, 10000); //loops WX function every 10 seconds (10000 milliseconds)
