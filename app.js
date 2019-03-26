@@ -69,4 +69,4 @@ function WX(){
   })
 };
 
-setInterval(WX, 10000); //loops WX function every 10 seconds (10000 milliseconds) TO INFINITY AND BEYOND OR ATLEAST UNTIL A REBOOT
+setInterval(WX, 60000); //loops WX function every 60 seconds (10000 milliseconds) TO INFINITY AND BEYOND OR ATLEAST UNTIL A REBOOT

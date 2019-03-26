@@ -40,4 +40,4 @@ function callMQTT(temp, hum){ //wrapped MQTT message handler in function callMQT
 
 };
 
-setInterval(callMQTT, 10000, temp, hum); //loops callMQTT function every 10 seconds (10000 milliseconds)
+setInterval(callMQTT, 60000, temp, hum); //loops callMQTT function every 60 seconds (60000 milliseconds)
