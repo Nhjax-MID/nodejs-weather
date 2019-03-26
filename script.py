@@ -1,4 +1,4 @@
 import sys
 import json
 
-Print "Lighting Detected"
+Print ("Lighting Detected")
