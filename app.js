@@ -13,8 +13,8 @@ function WX(){
 
   let options = {
     mode: 'json',};
-  PythonShell.run('script.py', options, function (err, results) {
-    if (err) throw err;
+
+  PythonShell.run('script.py', options, function (results) {
     console.log('Results from Python ' + results);
     results = (results);
   });
