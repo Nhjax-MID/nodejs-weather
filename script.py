@@ -9,12 +9,31 @@ GPIO.setmode(GPIO.BCM)
 
 InterruptGPIOpin = 16
 
-
 sensor = AS3935(address=0x02, bus=1)
+
+try:
+
+    sensor.set_indoors(False)
+
+    print ("Thunder Board present at address 0x02")
+
+except IOError as e:
+    sensor = AS3935(address=0x03, bus=1)
+
+    try:
+
+        sensor.set_indoors(False)
+
+        print ("Thunder Board present at address 0x03")
+
+    except IOError as e:
+
+        print ("Thunder Board not present")
+exit()
 
 sensor.set_indoors(False)
 sensor.set_noise_floor(0)
-sensor.calibrate(tun_cap=None)
+sensor.calibrate(tun_cap=0x09)
 sensor.set_min_strikes(1)
 
 count = 0
@@ -50,4 +69,5 @@ def readLightningStatus():
 
 
 while True:
+    time.sleep(1.0)
     readLightningStatus()
