@@ -6,7 +6,7 @@ var mqtt = require('mqtt'); //import modual
 const {PythonShell} = require("python-shell"); //Modual for Python Script for Future Lighting Board
 
 var MQTT_TOPIC          = "test";//sets topic
-var MQTT_ADDR           = "mqtt://76.106.248.100"; //address of subscriber
+var MQTT_ADDR           = "mqtt://test.mosquitto.org"; //address of subscriber
 var MQTT_PORT           = 1883; //common MQTT port
 
 function WX(){
@@ -30,9 +30,11 @@ function WX(){
         /*  console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
               'humidity: ' + humidity.toFixed(1) + '%'
           ); */
-
+          console.log("entering input temp and hum");
           temp = (temperature.toFixed(1));
           hum = (humidity.toFixed(1));
+          console.log("exiting input temp and hum");
+
 
           callMQTT(temp, hum, res);
 
