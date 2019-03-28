@@ -11,6 +11,8 @@ var MQTT_PORT           = 1883; //common MQTT port
 
 function WX(){
 
+  console.log('inside wx');
+
   let options = { //Python Script
     mode: 'text', //Python Script
     pythonOptions: ['-u'] //Python Script
