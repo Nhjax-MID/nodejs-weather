@@ -16,7 +16,7 @@ function WX(){
     pythonOptions: ['-u'] //Python Script
 }; //Python Script
 
-  PythonShell.run('script.py', options, function (err, results) { //Python Script
+  PythonShell.run('./script.py', options, function (err, results) { //Python Script
     n = (results.match("sense"));
     if (n = true){ //Python Script for Future Lighting Board
       res = results;
