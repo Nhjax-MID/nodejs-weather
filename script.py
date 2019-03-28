@@ -11,10 +11,12 @@ InterruptGPIOpin = 16
 
 sensor = AS3935(address=0x02, bus=1)
 
+sensor.reset()
 sensor.set_indoors(False)
 sensor.set_noise_floor(0)
 sensor.calibrate(tun_cap=0x09)
 sensor.set_min_strikes(1)
+
 
 count = 0
 runcount = 0
@@ -25,9 +27,9 @@ def handle_interrupt(channel):
     global sensor
     reason = sensor.get_interrupt()
     if reason == 0x01:
-        sensor.raise_noise_floor()
+        print ("Noise")
     elif reason == 0x04:
-        sensor.set_mask_disturber(True)
+        print ("Disturber")
     elif reason == 0x08:
         now = datetime.now().strftime('%H:%M:%S - %Y/%m/%d')
         distance = sensor.get_distance()
