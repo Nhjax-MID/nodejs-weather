@@ -30,8 +30,10 @@ function WX(){
         /*  console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
               'humidity: ' + humidity.toFixed(1) + '%'
           ); */
+          console.log("entering input temp and hum");
           temp = (temperature.toFixed(1));
           hum = (humidity.toFixed(1));
+          console.log("entering input temp and hum");
 
 
           callMQTT(temp, hum, res);
@@ -59,14 +61,9 @@ function callMQTT(temp, hum, res){ //wrapped MQTT message handler in function ca
         let obj = {temp:temp,hum:hum,res:res}; //oject is assigned value
         buf = Buffer.from(JSON.stringify(obj)); //buffer is dumped into a JSON object using obj
         client.publish(MQTT_TOPIC, buf); //message is pulished to subscriber
+        console.log("Message sent successfully" + buf);
       }
     })
-  })
-
-  client.on('message', function (topic, message) { //message is echoed on publisher terminal
-    // message is Buffer
-    console.log(JSON.parse(message.toString()))
-    client.end() //Client is terminated
   })
 
   client.on('error', function(){ //Error handler
@@ -78,4 +75,4 @@ function callMQTT(temp, hum, res){ //wrapped MQTT message handler in function ca
 
 };
 
-setInterval(WX, 5000); //loops WX function every 10 seconds (10000 milliseconds) TO INFINITY AND BEYOND OR ATLEAST UNTIL A REBOOT
+setInterval(WX, 1000); //loops WX function every 10 seconds (10000 milliseconds) TO INFINITY AND BEYOND OR ATLEAST UNTIL A REBOOT
