@@ -12,12 +12,12 @@ var MQTT_PORT           = 1883; //common MQTT port
 function WX(){
 
   let options = { //Python Script
-    mode: 'test', //Python Script
+    mode: 'text', //Python Script
     pythonOptions: ['-u'] //Python Script
 }; //Python Script
 
   PythonShell.run('script.py', options, function (err, results) { //Python Script
-    if (results = "yes"){ //Python Script for Future Lighting Board
+    if (results = str.includes("detected"){ //Python Script for Future Lighting Board
       res = "yes"; //Python Script for Future Lighting Board
     } else { //Python Script for Future Lighting Board
       res = "no"; //Python Script for Future Lighting Board
