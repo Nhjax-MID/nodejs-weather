@@ -17,10 +17,11 @@ function WX(){
 }; //Python Script
 
   PythonShell.run('script.py', options, function (err, results) { //Python Script
-    if (results = str.includes("detected")){ //Python Script for Future Lighting Board
-      res = "yes"; //Python Script for Future Lighting Board
+    n = (str.includes("detected"))
+    if (n = true){ //Python Script for Future Lighting Board
+      res = results; //Python Script for Future Lighting Board
     } else { //Python Script for Future Lighting Board
-      res = "no"; //Python Script for Future Lighting Board
+      res = "no detection"; //Python Script for Future Lighting Board
     } //Python Script for Future Lighting Board
 }); //Python Script for Future Lighting Board
 
