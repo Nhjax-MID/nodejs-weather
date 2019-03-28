@@ -32,7 +32,7 @@ def handle_interrupt(channel):
     elif reason == 0x08:
         now = datetime.now().strftime('%H:%M:%S - %Y/%m/%d')
         distance = sensor.get_distance()
-        print ("lightning " + str(distance) + "km away. (%s)" % now)
+        print ("lightning " + str(distance) + "km away. " + now)
 
 #GPIO.setup(InterruptGPIOpin, GPIO.IN )
 GPIO.setup(InterruptGPIOpin, GPIO.IN, pull_up_down = GPIO.PUD_UP )
