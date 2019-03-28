@@ -16,15 +16,21 @@ function WX(){
     pythonOptions: ['-u'] //Python Script
 }; //Python Script
 
-  PythonShell.run('./script.py', options, function (err, results) { //Python Script
-    n = (results.match("sense"));
-    if (n = true){ //Python Script for Future Lighting Board
-      res = results;
-      console.log(results); //Python Script for Future Lighting Board
-    } else { //Python Script for Future Lighting Board
-      res = "no detection";
-      console.log('no res ', results) //Python Script for Future Lighting Board
-    } //Python Script for Future Lighting Board
+  PythonShell.run('script.py', options, function (err, results) { //Python Script
+    console.log('python.run');
+    if (err) {
+      console.log(err);
+    } else {
+      n = (results.match("sense"));
+      if (n = true){ //Python Script for Future Lighting Board
+        res = results;
+        console.log(results); //Python Script for Future Lighting Board
+      } else { //Python Script for Future Lighting Board
+        res = "no detection";
+        console.log('no res ', results) //Python Script for Future Lighting Board
+      } //Python Script for Future Lighting Board
+    }
+
 }); //Python Script for Future Lighting Board
 
 
