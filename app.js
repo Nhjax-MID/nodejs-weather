@@ -30,19 +30,17 @@ function WX(){
         /*  console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
               'humidity: ' + humidity.toFixed(1) + '%'
           ); */
-          console.log("entering input temp and hum");
           temp = (temperature.toFixed(1));
           hum = (humidity.toFixed(1));
-          console.log("exiting input temp and hum");
 
 
           callMQTT(temp, hum, res);
 
       }
-      else {
+      /*else {
             console.log("");
         console.log("DANGER WILL ROBINSON SENSOR IS ON VACATION DESTROY ROBINSON FAMILY DESTROY JUPITER ONE"); //DHT sensor not working
-      }
+      }*/
   })
 };
 
@@ -80,4 +78,4 @@ function callMQTT(temp, hum, res){ //wrapped MQTT message handler in function ca
 
 };
 
-setInterval(WX, 10000); //loops WX function every 10 seconds (10000 milliseconds) TO INFINITY AND BEYOND OR ATLEAST UNTIL A REBOOT
+setInterval(WX, 5000); //loops WX function every 10 seconds (10000 milliseconds) TO INFINITY AND BEYOND OR ATLEAST UNTIL A REBOOT
