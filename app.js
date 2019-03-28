@@ -17,11 +17,13 @@ function WX(){
 }; //Python Script
 
   PythonShell.run('script.py', options, function (err, results) { //Python Script
-    n = results.match("");
-    if (n != null){ //Python Script for Future Lighting Board
-      res = results; //Python Script for Future Lighting Board
+    n = (results.match("sense"));
+    if (n = true){ //Python Script for Future Lighting Board
+      res = results;
+      console.log(results); //Python Script for Future Lighting Board
     } else { //Python Script for Future Lighting Board
-      res = "no detection"; //Python Script for Future Lighting Board
+      res = "no detection";
+      console.log('no res ', results) //Python Script for Future Lighting Board
     } //Python Script for Future Lighting Board
 }); //Python Script for Future Lighting Board
 
