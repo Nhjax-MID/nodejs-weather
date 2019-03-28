@@ -17,7 +17,7 @@ function WX(){
 }; //Python Script
 
   PythonShell.run('script.py', options, function (err, results) { //Python Script
-    n = results.match("sensed");
+    n = results.match("");
     if (n != null){ //Python Script for Future Lighting Board
       res = results; //Python Script for Future Lighting Board
     } else { //Python Script for Future Lighting Board
