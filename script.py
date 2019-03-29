@@ -47,6 +47,7 @@ def handle_interrupt(channel):
     reason = sensor.get_interrupt()
     #print "Interrupt reason=", reason
     if reason == 0x01:
+        print ("It was " + str(distance) + "km away. (%s)" % now)
         #print ("Noise level too high - adjusting")
         #sensor.reset()
         #sensor.raise_noise_floor()
