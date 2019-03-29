@@ -12,12 +12,12 @@ var client  = mqtt.connect(MQTT_ADDR,{
   debug:true});
 
 client.on('connect', function () {
-  client.subscribe('WX', function (message) {
+  client.subscribe(MQTT_TOPIC, function (message) {
       console.log(message.toString())
   })
 })
 
-client.on('message', function (topic, message) {
+client.on('message', function (MQTT_TOPIC, message) {
   // message is Buffer
   console.log(message.toString())
   client.end()
