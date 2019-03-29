@@ -52,6 +52,4 @@ def readLightningStatus():
 	disp_lco = sensor.get_disp_lco()
 	interrupt = sensor.get_interrupt()
 
-
-while True:
-    readLightningStatus()
+readLightningStatus()
