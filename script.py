@@ -5,6 +5,9 @@ import RPi.GPIO as GPIO
 import time
 from datetime import datetime
 
+result = "No Lightning"
+
+
 GPIO.setmode(GPIO.BCM)
 
 InterruptGPIOpin = 16
@@ -21,7 +24,6 @@ sensor.set_min_strikes(1)
 count = 0
 runcount = 0
 def handle_interrupt(channel):
-    result = "No Lightning"
     global count
     count = count + 1
     time.sleep(0.003)
@@ -54,5 +56,6 @@ def readLightningStatus():
 	mask_disturber = sensor.get_mask_disturber()
 	disp_lco = sensor.get_disp_lco()
 	interrupt = sensor.get_interrupt()
+    print (result)
 
 readLightningStatus()
