@@ -58,6 +58,9 @@ GPIO.setup(InterruptGPIOpin, GPIO.IN, pull_up_down = GPIO.PUD_UP )
 GPIO.add_event_detect(InterruptGPIOpin, GPIO.RISING, callback=handle_interrupt)
 
 #print "Waiting for lightning - or at least something that looks like it"
+now = datetime.now().strftime('%H:%M:%S - %Y/%m/%d')
+test = {"LightningDetected": "No", "Time": now}
+
 def MQTTpub():
     msg = json.dumps(test)
     client.publish(TOPIC, msg)
