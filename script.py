@@ -67,7 +67,6 @@ def handle_interrupt(channel):
         distance = sensor.get_distance()
         #print "We sensed lightning!"
         test = ("Lighting detected " + str(distance) + "km away. (%s)" % now)
-        global test
         MQTTpub()
         #print ""
 
