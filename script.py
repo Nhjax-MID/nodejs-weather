@@ -64,7 +64,7 @@ GPIO.add_event_detect(InterruptGPIOpin, GPIO.RISING, callback=handle_interrupt)
 now = datetime.now().strftime('%H:%M:%S - %Y/%m/%d')
 test = {"LightningDetected": "No", "Time": now}
 MQTTpub()
-#print "Waiting for lightning - or at least something that looks like it"
+print "Waiting for lightning - or at least something that looks like it"
 
 def readLightningStatus():
 	distance = sensor.get_distance()
