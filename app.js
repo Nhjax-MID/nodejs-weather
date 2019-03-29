@@ -3,7 +3,8 @@ var temp; //global variable for DHT Sensors
 var hum; //global variable for DHT Sensors
 var res; //global variable for future lightning board
 var mqtt = require('mqtt'); //import modual
-const {PythonShell} = require("python-shell"); //Modual for Python Script for Future Lighting Board
+//const {PythonShell} = require("python-shell"); //Modual for Python Script for Future Lighting Board
+import {PythonShell} from 'python-shell';
 
 var MQTT_TOPIC          = "test";//sets topic
 var MQTT_ADDR           = "mqtt://test.mosquitto.org"; //address of subscriber
@@ -23,14 +24,7 @@ function WX(){
     if (err) {
       console.log(err);
     } else {
-      n = (results.match("sense"));
-      if (n = true){ //Python Script for Future Lighting Board
-        res = results;
         console.log(results); //Python Script for Future Lighting Board
-      } else { //Python Script for Future Lighting Board
-        res = "no detection";
-        console.log('no res ', results) //Python Script for Future Lighting Board
-      } //Python Script for Future Lighting Board
     }
 
 }); //Python Script for Future Lighting Board
