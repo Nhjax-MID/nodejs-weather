@@ -56,6 +56,6 @@ def readLightningStatus():
 	mask_disturber = sensor.get_mask_disturber()
 	disp_lco = sensor.get_disp_lco()
 	interrupt = sensor.get_interrupt()
-    print(result)
 
 readLightningStatus()
+print(result)
