@@ -56,17 +56,17 @@ def handle_interrupt(channel):
 #GPIO.setup(InterruptGPIOpin, GPIO.IN )
 GPIO.setup(InterruptGPIOpin, GPIO.IN, pull_up_down = GPIO.PUD_UP )
 GPIO.add_event_detect(InterruptGPIOpin, GPIO.RISING, callback=handle_interrupt)
-
+    now = datetime.now().strftime('%H:%M:%S - %Y/%m/%d')
+    test = {"LightningDetected": "No", "Time": now}
+    MQTTpub()
 #print "Waiting for lightning - or at least something that looks like it"
-now = datetime.now().strftime('%H:%M:%S - %Y/%m/%d')
-test = {"LightningDetected": "No", "Time": now}
+
 
 def MQTTpub():
     msg = json.dumps(test)
     client.publish(TOPIC, msg)
 
 def readLightningStatus():
-
 	distance = sensor.get_distance()
 	noise_floor = sensor.get_noise_floor()
 	min_strikes = sensor.get_min_strikes()
