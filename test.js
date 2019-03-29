@@ -1,6 +1,6 @@
 var mqtt = require('mqtt')
 var MQTT_TOPIC          = "WX";//sets topic
-var MQTT_ADDR           = "mqtt://localhost"; //address of subscriber
+var MQTT_ADDR           = "mqtt://127.0.0.1"; //address of subscriber
 var MQTT_PORT           = 1883; //common MQTT port
 
 function mqttserver(){
