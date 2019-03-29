@@ -40,7 +40,7 @@ def handle_interrupt(channel):
         now = datetime.now().strftime('%H:%M:%S - %Y/%m/%d')
         distance = sensor.get_distance()
         result =  ("lightning " + str(distance) + "km away. " + now)
-    print (result)
+    print(result)
     exit()
 
 #GPIO.setup(InterruptGPIOpin, GPIO.IN )
@@ -56,6 +56,6 @@ def readLightningStatus():
 	mask_disturber = sensor.get_mask_disturber()
 	disp_lco = sensor.get_disp_lco()
 	interrupt = sensor.get_interrupt()
-    print (result)
+    print(result)
 
 readLightningStatus()
