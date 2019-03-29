@@ -6,11 +6,11 @@ import time
 from datetime import datetime
 import paho.mqtt.client as mqtt
 
-SERVER = '76.106.248.100'
+SERVER = '192.168.1.149'
 CLIENT_ID = 'JAX_SENSOR'
 TOPIC = 'test'
 client = mqtt.Client(CLIENT_ID, SERVER)
-client.connect("76.106.248.100", 1883)
+client.connect("192.168.1.149", 1883)
 
 GPIO.setmode(GPIO.BCM)
 
