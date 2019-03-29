@@ -4,6 +4,13 @@ from SDL_Pi_Thunderboard_AS3935 import  AS3935
 import RPi.GPIO as GPIO
 import time
 from datetime import datetime
+import paho.mqtt.client as mqtt
+
+SERVER = '76.122.12.92'
+CLIENT_ID = 'JAX_SENSOR'
+TOPIC = 'jax'
+client = mqtt.Client(CLIENT_ID, SERVER)
+client.connect("76.122.12.92", 1883)
 
 GPIO.setmode(GPIO.BCM)
 
@@ -41,26 +48,27 @@ count = 0
 runcount = 0
 def handle_interrupt(channel):
     global count
+    global test
     count = count + 1
     time.sleep(0.003)
     global sensor
     reason = sensor.get_interrupt()
     #print "Interrupt reason=", reason
     if reason == 0x01:
-        print ("It was " + str(distance) + "km away. (%s)" % now)
         #print ("Noise level too high - adjusting")
         #sensor.reset()
-        #sensor.raise_noise_floor()
+        sensor.raise_noise_floor()
     elif reason == 0x04:
-        print ("It was " + str(distance) + "km away. (%s)" % now)
         #print ("Disturber detected - masking")
         #sensor.reset()
-        #sensor.set_mask_disturber(True)
+        sensor.set_mask_disturber(True)
     elif reason == 0x08:
         now = datetime.now().strftime('%H:%M:%S - %Y/%m/%d')
         distance = sensor.get_distance()
         #print "We sensed lightning!"
-        print ("It was " + str(distance) + "km away. (%s)" % now)
+        test = ("Lighting detected " + str(distance) + "km away. (%s)" % now)
+        global test
+        MQTTpub()
         #print ""
 
 
@@ -69,7 +77,9 @@ GPIO.setup(InterruptGPIOpin, GPIO.IN, pull_up_down = GPIO.PUD_UP )
 GPIO.add_event_detect(InterruptGPIOpin, GPIO.RISING, callback=handle_interrupt)
 
 #print "Waiting for lightning - or at least something that looks like it"
+def MQTTpub():
 
+    client.publish(TOPIC, test)
 
 def readLightningStatus():
 
