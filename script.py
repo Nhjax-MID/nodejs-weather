@@ -11,7 +11,7 @@ InterruptGPIOpin = 16
 
 
 sensor = AS3935(address=0x02, bus=1)
-
+sensor.reset()
 
 try:
 
