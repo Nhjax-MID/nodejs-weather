@@ -6,10 +6,11 @@ import time
 from datetime import datetime
 import paho.mqtt.client as mqtt
 
-SERVER = '76.122.12.92'
+SERVER = '76.106.248.100'
 CLIENT_ID = 'JAX_SENSOR'
-TOPIC = 'jax'
+TOPIC = 'test'
 client = mqtt.Client(CLIENT_ID, SERVER)
+client.connect("76.106.248.100", 1883)
 
 GPIO.setmode(GPIO.BCM)
 
@@ -17,27 +18,8 @@ InterruptGPIOpin = 16
 
 
 sensor = AS3935(address=0x02, bus=1)
+
 sensor.reset()
-
-try:
-
-    sensor.set_indoors(False)
-
-    print ("Thunder Board present at address 0x02")
-
-except IOError as e:
-    sensor = AS3935(address=0x03, bus=1)
-
-    try:
-
-        sensor.set_indoors(False)
-
-        print ("Thunder Board present at address 0x03")
-
-    except IOError as e:
-
-        print ("Thunder Board not present")
-
 sensor.set_indoors(False)
 sensor.set_noise_floor(0)
 sensor.calibrate(tun_cap=0x09)
@@ -54,10 +36,18 @@ def handle_interrupt(channel):
     reason = sensor.get_interrupt()
     #print "Interrupt reason=", reason
     if reason == 0x01:
+        now = datetime.now().strftime('%H:%M:%S - %Y/%m/%d')
+        distance = sensor.get_distance()
+        test = ("Lighting detected " + str(distance) + "km away. (%s)" % now)
+        MQTTpub()
         #print ("Noise level too high - adjusting")
         #sensor.reset()
         sensor.raise_noise_floor()
     elif reason == 0x04:
+        now = datetime.now().strftime('%H:%M:%S - %Y/%m/%d')
+        distance = sensor.get_distance()
+        test = ("Lighting detected " + str(distance) + "km away. (%s)" % now)
+        MQTTpub()
         #print ("Disturber detected - masking")
         #sensor.reset()
         sensor.set_mask_disturber(True)
@@ -76,7 +66,6 @@ GPIO.add_event_detect(InterruptGPIOpin, GPIO.RISING, callback=handle_interrupt)
 
 #print "Waiting for lightning - or at least something that looks like it"
 def MQTTpub():
-    client.connect("76.122.12.92", 1883)
     client.publish(TOPIC, test)
 
 def readLightningStatus():
