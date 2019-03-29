@@ -2,7 +2,6 @@ var sensor = require('node-dht-sensor'); //little blue sensor modual
 var temp; //global variable for DHT Sensors
 var hum; //global variable for DHT Sensors
 var mqtt = require('mqtt'); //import modual
-const {PythonShell} = require("python-shell"); //Modual for Python Script for Future Lighting Board
 
 var MQTT_TOPIC          = "test";//sets topic
 var MQTT_ADDR           = "mqtt://76.106.248.100"; //address of subscriber
