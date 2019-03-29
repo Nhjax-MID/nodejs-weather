@@ -54,5 +54,4 @@ def readLightningStatus():
 
 
 while True:
-    time.sleep(1.0)
     readLightningStatus()
