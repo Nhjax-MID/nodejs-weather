@@ -36,14 +36,10 @@ def handle_interrupt(channel):
     reason = sensor.get_interrupt()
     #print "Interrupt reason=", reason
     if reason == 0x01:
-        test = {"LightningDetected": "No"}
-        MQTTpub()
         #print ("Noise level too high - adjusting")
         #sensor.reset()
         sensor.raise_noise_floor()
     elif reason == 0x04:
-        test = {"LightningDetected": "No"}
-        MQTTpub()
         #print ("Disturber detected - masking")
         #sensor.reset()
         sensor.set_mask_disturber(True)
