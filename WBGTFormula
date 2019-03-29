@@ -1,0 +1,7 @@
+relative = exp(17.27*TempFromSensorCelsius/(237.7+TempFromSensorCelsius))
+
+vapor = HumidityFromSensor/100*WindsInMPS*relative
+
+wbgtcelsisus = 0.567*TempFromSensorCelsius+0.393*vapor+3.94
+
+wbgtfahrehiet  = (wbgtcelsisus * 1.8) + 32
