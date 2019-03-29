@@ -63,7 +63,8 @@ GPIO.add_event_detect(InterruptGPIOpin, GPIO.RISING, callback=handle_interrupt)
 
 #print "Waiting for lightning - or at least something that looks like it"
 def MQTTpub():
-    client.publish(TOPIC, test)
+    msg = json.dumps(test)
+    client.publish(TOPIC, msg)
 
 def readLightningStatus():
 
