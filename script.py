@@ -48,9 +48,11 @@ def handle_interrupt(channel):
     #print "Interrupt reason=", reason
     if reason == 0x01:
         print ("Noise level too high - adjusting")
+        sensor.reset()
         #sensor.raise_noise_floor()
     elif reason == 0x04:
         print ("Disturber detected - masking")
+        sensor.reset()
         #sensor.set_mask_disturber(True)
     elif reason == 0x08:
         now = datetime.now().strftime('%H:%M:%S - %Y/%m/%d')
