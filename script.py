@@ -27,6 +27,11 @@ sensor.set_min_strikes(1)
 
 count = 0
 runcount = 0
+
+def MQTTpub():
+    msg = json.dumps(test)
+    client.publish(TOPIC, msg)
+
 def handle_interrupt(channel):
     global count
     global test
@@ -60,11 +65,6 @@ now = datetime.now().strftime('%H:%M:%S - %Y/%m/%d')
 test = {"LightningDetected": "No", "Time": now}
 MQTTpub()
 #print "Waiting for lightning - or at least something that looks like it"
-
-
-def MQTTpub():
-    msg = json.dumps(test)
-    client.publish(TOPIC, msg)
 
 def readLightningStatus():
 	distance = sensor.get_distance()
