@@ -26,18 +26,19 @@ def handle_interrupt(channel):
     time.sleep(0.003)
     global sensor
     reason = sensor.get_interrupt()
-    print (reason);
+    #print (reason);
     if reason == 0x01:
-        print ("Noise")
+        #print ("Noise")
         sensor.raise_noise_floor()
     elif reason == 0x04:
-        print ("Disturber")
+        #print ("Disturber")
         sensor.set_mask_disturber(True)
     elif reason == 0x08:
         now = datetime.now().strftime('%H:%M:%S - %Y/%m/%d')
         distance = sensor.get_distance()
         print ("lightning " + str(distance) + "km away. " + now)
-
+    exit()
+    
 #GPIO.setup(InterruptGPIOpin, GPIO.IN )
 GPIO.setup(InterruptGPIOpin, GPIO.IN, pull_up_down = GPIO.PUD_UP )
 GPIO.add_event_detect(InterruptGPIOpin, GPIO.RISING, callback=handle_interrupt)
