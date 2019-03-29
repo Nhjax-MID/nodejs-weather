@@ -5,7 +5,7 @@ var mqtt = require('mqtt'); //import modual
 const {PythonShell} = require("python-shell"); //Modual for Python Script for Future Lighting Board
 
 var MQTT_TOPIC          = "test";//sets topic
-var MQTT_ADDR           = "76.106.248.100"; //address of subscriber
+var MQTT_ADDR           = "mqtt://76.106.248.100"; //address of subscriber
 var MQTT_PORT           = 1883; //common MQTT port
 
 function WX(){
