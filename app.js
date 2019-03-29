@@ -16,7 +16,7 @@ function WX(){
   let options = { //Python Script
     mode: 'text', //Python Script
     pythonOptions: ['-u'] //Python Script
-}; //Python Script
+} //Python Script
 
   PythonShell.run('script.py', options, function (err, results) { //Python Script
     console.log('python.run');
@@ -26,7 +26,7 @@ function WX(){
         console.log(results); //Python Script for Future Lighting Board
     }
 
-}); //Python Script for Future Lighting Board
+}) //Python Script for Future Lighting Board
 
 
   sensor.read(11, 4, function(err, temperature, humidity) {

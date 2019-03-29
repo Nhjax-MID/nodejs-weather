@@ -21,6 +21,7 @@ sensor.set_min_strikes(1)
 count = 0
 runcount = 0
 def handle_interrupt(channel):
+    result = "No Lightning"
     global count
     count = count + 1
     time.sleep(0.003)
@@ -36,9 +37,10 @@ def handle_interrupt(channel):
     elif reason == 0x08:
         now = datetime.now().strftime('%H:%M:%S - %Y/%m/%d')
         distance = sensor.get_distance()
-        print ("lightning " + str(distance) + "km away. " + now)
+        result =  ("lightning " + str(distance) + "km away. " + now)
+    print (result)
     exit()
-    
+
 #GPIO.setup(InterruptGPIOpin, GPIO.IN )
 GPIO.setup(InterruptGPIOpin, GPIO.IN, pull_up_down = GPIO.PUD_UP )
 GPIO.add_event_detect(InterruptGPIOpin, GPIO.RISING, callback=handle_interrupt)
