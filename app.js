@@ -30,7 +30,7 @@ function WX(){
   })
 };
 
-function callMQTT(temp, hum, res){ //wrapped MQTT message handler in function callMQTT
+function callMQTT(temp, hum){ //wrapped MQTT message handler in function callMQTT
 
   var client  = mqtt.connect(MQTT_ADDR,{
     clientId: 'bgtestnodejs',
