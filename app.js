@@ -3,8 +3,7 @@ var temp; //global variable for DHT Sensors
 var hum; //global variable for DHT Sensors
 var res; //global variable for future lightning board
 var mqtt = require('mqtt'); //import modual
-//const {PythonShell} = require("python-shell"); //Modual for Python Script for Future Lighting Board
-import {PythonShell} from 'python-shell';
+const {PythonShell} = require("python-shell"); //Modual for Python Script for Future Lighting Board
 
 var MQTT_TOPIC          = "test";//sets topic
 var MQTT_ADDR           = "mqtt://test.mosquitto.org"; //address of subscriber
