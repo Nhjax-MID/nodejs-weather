@@ -9,7 +9,6 @@ var MQTT_PORT           = 1883; //common MQTT port
 
 function WX(){
 
-  console.log('inside wx');
   sensor.read(11, 4, function(err, temperature, humidity) {
       if (!err) {
         /*  console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
@@ -44,7 +43,7 @@ function callMQTT(temp, hum){ //wrapped MQTT message handler in function callMQT
         let obj = {temp:temp,hum:hum}; //oject is assigned value
         buf = Buffer.from(JSON.stringify(obj)); //buffer is dumped into a JSON object using obj
         client.publish(MQTT_TOPIC, buf); //message is pulished to subscriber
-        // console.log("Message sent successfully" + buf);
+        console.log("Message sent successfully" + buf);
         client.end()
       }
     })
