@@ -8,7 +8,7 @@ import paho.mqtt.client as mqtt
 
 SERVER = '192.168.1.163'
 CLIENT_ID = 'JAX_SENSOR'
-TOPIC = 'WX'
+TOPIC = 'WX/JAX'
 client = mqtt.Client(CLIENT_ID, SERVER)
 client.connect("76.106.248.100", 1883)
 

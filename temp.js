@@ -3,7 +3,7 @@ var temp; //global variable for DHT Sensors
 var hum; //global variable for DHT Sensors
 var mqtt = require('mqtt'); //import modual
 
-var MQTT_TOPIC          = "WX";//sets topic
+var MQTT_TOPIC          = "WX/JAX";//sets topic
 var MQTT_ADDR           = "mqtt://192.168.1.163"; //address of subscriber
 var MQTT_PORT           = 1883; //common MQTT port
 
