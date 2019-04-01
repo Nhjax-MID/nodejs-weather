@@ -41,10 +41,8 @@ function callMQTT(temp, hum){ //wrapped MQTT message handler in function callMQT
     client.subscribe(MQTT_TOPIC, function (err) {
       if (!err) {
         let obj = {temp:temp,hum:hum}; //oject is assigned value
-        buf = Buffer.from(JSON.stringify(MQTT_TOPIC, obj)); //buffer is dumped into a JSON object using obj
-        client.publish(MQTT_TOPIC, buf); //message is pulished to subscriber
-        console.log("Topic " + MQTT_TOPIC);
-        console.log("Message sent successfully" + buf);
+        buf = Buffer.from(JSON.stringify(MQTT_TOPIC + obj)); //buffer is dumped into a JSON object using obj
+        client.publish(buf); //message is pulished to subscriber
         client.end()
       }
     })
