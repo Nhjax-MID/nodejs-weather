@@ -23,6 +23,8 @@ try:
     sensor.set_indoors(False)
 
     print ("Thunder Board present at address 0x02")
+    test = {"Location": TOPIC, "Lightning Detector Status": "O N L I N E"}
+    MQTTpub()
 
 except IOError as e:
     sensor = AS3935(address=0x03, bus=1)
@@ -32,10 +34,14 @@ except IOError as e:
         sensor.set_indoors(False)
 
         print ("Thunder Board present at address 0x03")
+        test = {"Location": TOPIC, "Lightning Detector Status": "S A F E M O D E"}
+        MQTTpub()
 
     except IOError as e:
 
         print ("Thunder Board not present")
+        print ("Thunder Board present at address 0x03")
+        test = {"Location": TOPIC, "Lightning Detector Status": "O F F L I N E  C A L L  K E V I N"}
 
 sensor.reset()
 sensor.set_indoors(False)
