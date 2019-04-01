@@ -7,7 +7,7 @@ from datetime import datetime
 import paho.mqtt.client as mqtt
 
 SERVER = '192.168.1.163'
-CLIENT_ID = 'JAX_SENSOR'
+CLIENT_ID = 'jax'
 TOPIC = 'jax'
 client = mqtt.Client(CLIENT_ID, SERVER)
 client.connect("76.106.248.100", 1883)
@@ -59,11 +59,11 @@ def handle_interrupt(channel):
     reason = sensor.get_interrupt()
     #print "Interrupt reason=", reason
     if reason == 0x01:
-        #print ("Noise level too high - adjusting")
+        print ("Noise level too high - adjusting")
         #sensor.reset()
         sensor.raise_noise_floor()
     elif reason == 0x04:
-        #print ("Disturber detected - masking")
+        print ("Disturber detected - masking")
         #sensor.reset()
         sensor.set_mask_disturber(True)
     elif reason == 0x08:
@@ -81,7 +81,7 @@ GPIO.setup(InterruptGPIOpin, GPIO.IN, pull_up_down = GPIO.PUD_UP )
 GPIO.add_event_detect(InterruptGPIOpin, GPIO.RISING, callback=handle_interrupt)
 now = datetime.now().strftime('%H:%M:%S - %Y/%m/%d')
 test = {"LightningDetected": "No", "Time": now}
-MQTTpub()
+MQTTpub(test)
 print ("Waiting for lightning - or at least something that looks like it")
 
 def readLightningStatus():
