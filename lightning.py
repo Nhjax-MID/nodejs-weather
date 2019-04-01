@@ -18,6 +18,10 @@ InterruptGPIOpin = 16
 
 sensor = AS3935(address=0x02, bus=1)
 
+def MQTTpub():
+    msg = json.dumps(test)
+    client.publish(TOPIC, msg)
+
 try:
 
     sensor.set_indoors(False)
@@ -51,10 +55,6 @@ sensor.set_min_strikes(1)
 
 count = 0
 runcount = 0
-
-def MQTTpub():
-    msg = json.dumps(test)
-    client.publish(TOPIC, msg)
 
 def handle_interrupt(channel):
     global count
