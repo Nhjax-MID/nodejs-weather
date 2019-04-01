@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 import paho.mqtt.client as mqtt
 
-SERVER = '76.106.248.100'
+SERVER = '192.168.1.163'
 CLIENT_ID = 'JAX_SENSOR'
 TOPIC = 'WX'
 client = mqtt.Client(CLIENT_ID, SERVER)

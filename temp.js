@@ -4,7 +4,7 @@ var hum; //global variable for DHT Sensors
 var mqtt = require('mqtt'); //import modual
 
 var MQTT_TOPIC          = "WX";//sets topic
-var MQTT_ADDR           = "mqtt://76.106.248.100"; //address of subscriber
+var MQTT_ADDR           = "mqtt://192.168.1.163"; //address of subscriber
 var MQTT_PORT           = 1883; //common MQTT port
 
 function WX(){
@@ -13,7 +13,7 @@ function WX(){
       if (!err) {
           console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
               'humidity: ' + humidity.toFixed(1) + '%'
-          ); 
+          );
           temp = (temperature.toFixed(1));
           hum = (humidity.toFixed(1));
 
