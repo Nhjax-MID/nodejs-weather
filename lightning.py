@@ -27,15 +27,15 @@ try:
 except IOError as e:
     sensor = AS3935(address=0x03, bus=1)
 
-        try:
+    try:
 
-            sensor.set_indoors(False)
+        sensor.set_indoors(False)
 
-            print ("Thunder Board present at address 0x03")
+        print ("Thunder Board present at address 0x03")
 
-       	except IOError as e:
+    except IOError as e:
 
-        	print ("Thunder Board not present")
+        print ("Thunder Board not present")
 
 sensor.reset()
 sensor.set_indoors(False)
