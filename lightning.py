@@ -38,7 +38,7 @@ except IOError as e:
         sensor.set_indoors(False)
 
         print ("Thunder Board present at address 0x03")
-        test = {"Location": TOPIC, "Lightning Detector Status": "S A F E M O D E"}
+        test = {"Location": TOPIC, "LightningDetectorStatus": "S A F E M O D E"}
         MQTTpub()
 
     except IOError as e:
