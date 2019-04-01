@@ -10,7 +10,7 @@ SERVER = '192.168.1.163'
 CLIENT_ID = 'jax'
 TOPIC = 'jax'
 client = mqtt.Client(CLIENT_ID, SERVER)
-client.connect("76.106.248.100", 1883)
+client.connect("192.168.1.163", 1883)
 
 GPIO.setmode(GPIO.BCM)
 
@@ -81,7 +81,7 @@ GPIO.setup(InterruptGPIOpin, GPIO.IN, pull_up_down = GPIO.PUD_UP )
 GPIO.add_event_detect(InterruptGPIOpin, GPIO.RISING, callback=handle_interrupt)
 now = datetime.now().strftime('%H:%M:%S - %Y/%m/%d')
 test = {"LightningDetected": "No", "Time": now}
-MQTTpub(test)
+MQTTpub()
 print ("Waiting for lightning - or at least something that looks like it")
 
 def readLightningStatus():
