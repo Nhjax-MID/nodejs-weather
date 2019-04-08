@@ -65,19 +65,20 @@ def handle_interrupt(channel):
     reason = sensor.get_interrupt()
     #print "Interrupt reason=", reason
     if reason == 0x01:
-        print ("Noise level too high - adjusting")
+        #print ("Noise level too high - adjusting")
         #sensor.reset()
         sensor.raise_noise_floor()
     elif reason == 0x04:
-        print ("Disturber detected - masking")
+        #print ("Disturber detected - masking")
         #sensor.reset()
-        # sensor.set_mask_disturber(True)
+        sensor.set_mask_disturber(True)
     elif reason == 0x08:
         now = datetime.now().strftime('%H:%M:%S - %Y/%m/%d')
         distance = sensor.get_distance()
         distance = str(distance)
-        #print "We sensed lightning!"
+        print "We sensed lightning!"
         test = {"LightningDetected": "Yes", "Location": TOPIC, "DistanceKM": distance, "Time": now}
+        sensor.reset()
         MQTTpub()
         #print ""
 
