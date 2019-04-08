@@ -58,4 +58,4 @@ function callMQTT(temp, hum){ //wrapped MQTT message handler in function callMQT
 
 };
 
-setInterval(WX, 10000); //loops WX function every 10 seconds (10000 milliseconds) TO INFINITY AND BEYOND OR ATLEAST UNTIL A REBOOT
+setInterval(WX, 240000); //loops WX function every 10 seconds (10000 milliseconds) TO INFINITY AND BEYOND OR ATLEAST UNTIL A REBOOT
