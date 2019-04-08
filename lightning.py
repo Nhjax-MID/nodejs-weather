@@ -8,7 +8,7 @@ import paho.mqtt.client as mqtt
 
 # SERVER = '192.168.1.163'
 # CLIENT_ID = 'jax'
-# TOPIC = 'jax'
+TOPIC = 'jax'
 # client = mqtt.Client(CLIENT_ID, SERVER)
 # client.connect("192.168.1.163", 1883)
 
