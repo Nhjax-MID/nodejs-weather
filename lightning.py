@@ -67,7 +67,7 @@ def handle_interrupt(channel):
     if reason == 0x01:
         print ("Noise level too high - adjusting")
         #sensor.reset()
-        # sensor.raise_noise_floor()
+         sensor.raise_noise_floor()
     elif reason == 0x04:
         print ("Disturber detected - masking")
         #sensor.reset()
