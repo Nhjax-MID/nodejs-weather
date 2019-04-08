@@ -6,11 +6,11 @@ import time
 from datetime import datetime
 import paho.mqtt.client as mqtt
 
-SERVER = '192.168.1.163'
-CLIENT_ID = 'jax'
-TOPIC = 'jax'
-client = mqtt.Client(CLIENT_ID, SERVER)
-client.connect("192.168.1.163", 1883)
+# SERVER = '192.168.1.163'
+# CLIENT_ID = 'jax'
+# TOPIC = 'jax'
+# client = mqtt.Client(CLIENT_ID, SERVER)
+# client.connect("192.168.1.163", 1883)
 
 GPIO.setmode(GPIO.BCM)
 
@@ -20,7 +20,7 @@ sensor = AS3935(address=0x02, bus=1)
 
 def MQTTpub():
     msg = json.dumps(test)
-    client.publish(TOPIC, msg)
+    # client.publish(TOPIC, msg)
 
 try:
 
@@ -67,11 +67,11 @@ def handle_interrupt(channel):
     if reason == 0x01:
         print ("Noise level too high - adjusting")
         #sensor.reset()
-        sensor.raise_noise_floor()
+        # sensor.raise_noise_floor()
     elif reason == 0x04:
         print ("Disturber detected - masking")
         #sensor.reset()
-        sensor.set_mask_disturber(True)
+        # sensor.set_mask_disturber(True)
     elif reason == 0x08:
         now = datetime.now().strftime('%H:%M:%S - %Y/%m/%d')
         distance = sensor.get_distance()
